@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>덧셈계산기</h1>
+    첫번째정수: <input type="text" id="i1"><br>
+    두번째정수: <input type="text" id="i2"><br>
+    합계: <input type="text" id="sum"><br>
+    <button onclick="print()">합계</button>
+    <script>
+        function print()
+        {
+
+            let num1=parseInt(document.getElementById("i1").value);
+            let num2=parseInt(document.getElementById("i2").value);
+            let sum=num1+num2;
+            document.getElementById("sum").value=sum;
+        }
+    </script>
+</body>
+</html>
