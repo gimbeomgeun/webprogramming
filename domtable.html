@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.write('<table border=2px solid black id="special">');
+        for(let i=0;i<2;i++)
+        {
+            document.write('<tr>');
+            for(let j=0;j<2;j++)
+            {
+                document.write(`<td>(`+i+','+j+')</td>');
+            }
+            document.write('</tr>');
+        }
+        document.write('</table>');
+    </script>
+    <script>
+        function insert() {
+            let table=document.getElementById('special');
+            let row=table.insertRow(0);
+            let cell1=row.insertCell(0);
+            let cell2=row.insertCell(1);
+            cell1.innerHTML="새로운 셀 (1,1)";
+            cell2.innerHTML="새로운 셀 (1,2)";
+        }
+        function remove() {
+            let table=document.getElementById('special');
+            table.deleteRow(0);
+        }
+    </script>
+</head>
+<body>
+    <button onclick="insert()">행 추가</button>
+    <button onclick="remove()">행 삭제</button>
+</body>
+</html>
