@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<style>
+    #myCanvas {
+    background-color:rgb(241, 239, 209);
+    border: 1px dotted blue;
+}
+</style>
+<body>
+<div style="display: flex;">
+<button onclick="context.clearRect(0, 0, canvas.width, canvas.height);">화면 지우기</button><br>
+<button id="rectmode" onclick="rectMode()">□</button>
+</div>
+<canvas id="myCanvas" width="600" height="400"></canvas>
+<script>
+let canvas = document.getElementById("myCanvas");
+let context = canvas.getContext("2d");
+let last_x = 0, last_y = 0;
+let start_x=0,start_y=0;
+let draw_mode = false;
+let rect_mode=false;
+canvas.addEventListener("mousemove", function (event) {
+if (!draw_mode) return;
+let x = event.offsetX;
+let y = event.offsetY;
+last_x = x;
+last_y = y;
+if(rect_mode) return;
+context.lineTo(x, y);
+context.stroke();
+});
+canvas.addEventListener("mousedown", function (event) {
+last_x = event.offsetX;
+last_y = event.offsetY;
+if(rect_mode) {
+    start_x=event.offsetX;
+    start_y=event.offsetY;
+}
+context.beginPath();
+context.moveTo(last_x, last_y);
+draw_mode = true;
+});
+canvas.addEventListener("mouseup", function (event) {
+draw_mode = false;
+if(rect_mode) {
+    console.log(start_x,start_y);
+    context.fillRect(start_x,start_y,last_x-start_x,last_y-start_y);
+    console.log(last_x,last_y);
+}
+});
+canvas.addEventListener("mouseout", function (event) {
+draw_mode = false;
+});
+
+function rectMode() { //버튼 한 번 누르면 사각형 그리는 모드, 한 번 더 누르면 그냥 그리는 모드로 설정
+    if(rect_mode) {
+        rect_mode=false;
+        document.getElementById('rectmode').style.backgroundColor="";
+    }
+    else {
+        rect_mode = true;
+        document.getElementById('rectmode').style.backgroundColor="red";
+    }
+}
+</script>
